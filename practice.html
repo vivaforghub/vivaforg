@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Practice - VivaForge</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background: linear-gradient(to right, #74ebd5, #9face6);
+      margin: 0;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      margin: auto;
+      max-width: 500px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 { color: #333; }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover { background: #0056b3; }
+
+    textarea {
+      margin-top: 10px;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    p { font-size: 18px; }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h2>VivaForge Practice</h2>
+
+    <p id="question"></p>
+
+    <p><b>Score:</b> <span id="score">0</span></p>
+    <p><b>Progress:</b> <span id="progress"></span></p>
+    <p><b>Time Left:</b> <span id="timer">30</span> sec</p>
+
+    <p id="tip" style="color:blue;"></p>
+
+    <textarea placeholder="Type your answer here"></textarea><br>
+
+    <button onclick="markGood()">Good Answer</button>
+    <button onclick="skip()">Skip</button>
+
+    <br><br>
+
+    <a href="index.html">
+      <button>Back to Home</button>
+    </a>
+
+  </div>
+
+  <script>
+    let questions = [
+      "Tell me about yourself",
+      "Why should we hire you?",
+      "What are your strengths?",
+      "What are your weaknesses?",
+      "Where do you see yourself in 5 years?",
+      "Why do you want this job?"
+    ];
+
+    let tips = [
+      "Use simple and clear sentences",
+      "Avoid grammar mistakes like wrong tense",
+      "Speak confidently, not too fast",
+      "Be honest and structured",
+      "Think before answering",
+      "Stay calm and confident"
+    ];
+
+    let i = 0;
+    let score = 0;
+    let time = 30;
+    let interval;
+
+    function updateUI() {
+      document.getElementById("question").innerText = questions[i];
+      document.getElementById("score").innerText = score;
+      document.getElementById("progress").innerText = (i + 1) + "/" + questions.length;
+      document.getElementById("tip").innerText = tips[i];
+
+      clearInterval(interval);
+      startTimer();
+    }
+
+    function startTimer() {
+      time = 30;
+      document.getElementById("timer").innerText = time;
+
+      interval = setInterval(() => {
+        time--;
+        document.getElementById("timer").innerText = time;
+
+        if (time <= 0) {
+          clearInterval(interval);
+          next();
+        }
+      }, 1000);
+    }
+
+    function next() {
+      if (i < questions.length - 1) {
+        i++;
+        updateUI();
+      } else {
+        showResult();
+      }
+    }
+
+    function markGood() {
+      score++;
+      next();
+    }
+
+    function skip() {
+      next();
+    }
+
+    function showResult() {
+      document.body.innerHTML = `
+        <div style="text-align:center;">
+          <h2>Test Completed</h2>
+          <p>Your Score: ${score}</p>
+          <a href="index.html"><button>Go Home</button></a>
+        </div>
+      `;
+    }
+
+    updateUI();
+  </script>
+
+</body>
+</html>

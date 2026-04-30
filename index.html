@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VivaForge</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  text-align:center;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+}
+
+.card{
+  background:#1e293b;
+  padding:25px;
+  margin:15px 0;
+  border-radius:15px;
+  cursor:pointer;
+  transition:.3s;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  background:#334155;
+}
+
+h1{
+  color:#38bdf8;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>VivaForge</h1>
+  <p>Select Mode</p>
+
+  <!-- QUIZ OPTION -->
+  <div class="card" onclick="openQuiz()">
+    🎮 Grammar Quiz Game
+  </div>
+
+  <!-- INTERVIEW OPTION -->
+  <div class="card" onclick="openInterview()">
+    💼 Interview Practice
+  </div>
+
+</div>
+
+<script>
+function openQuiz(){
+  window.location.href="games.html";
+}
+
+function openInterview(){
+  window.location.href="practice.html";
+}
+</script>
+
+</body>
+</html>

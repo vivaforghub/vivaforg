@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VivaForge Grammar Game</title>
+<title>VivaForge App</title>
 
 <style>
 body{
@@ -15,70 +15,72 @@ body{
 }
 
 .container{
-  max-width:650px;
+  max-width:700px;
   margin:auto;
   padding:20px;
+}
+
+.header{
+  color:#38bdf8;
+  font-size:28px;
+  font-weight:bold;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
 .card{
   background:#1e293b;
   padding:20px;
   border-radius:15px;
-  box-shadow:0 0 20px rgba(0,0,0,0.4);
-  animation:fadeIn .4s ease-in;
-}
-
-h1{color:#38bdf8;}
-
-.level{
-  color:#fbbf24;
+  cursor:pointer;
+  transition:.2s;
   font-weight:bold;
 }
 
+.card:hover{
+  transform:scale(1.05);
+  background:#334155;
+}
+
+.screen{
+  display:none;
+  animation:fade .3s ease-in;
+}
+
+.active{
+  display:block;
+}
+
 button{
+  padding:10px;
+  margin:5px;
   width:100%;
-  margin:8px 0;
-  padding:12px;
   border:none;
   border-radius:10px;
   background:#38bdf8;
   font-weight:bold;
   cursor:pointer;
-  transition:.2s;
 }
 
 button:hover{
-  transform:scale(1.03);
   background:#0ea5e9;
 }
 
-#timer{
-  color:#f87171;
-  font-weight:bold;
-}
-
-.progress{
-  height:8px;
-  background:#334155;
-  border-radius:10px;
-  margin:10px 0;
-}
-
-.bar{
-  height:8px;
+.badge{
   background:#22c55e;
-  width:0%;
-  border-radius:10px;
-  transition:.3s;
+  padding:5px 10px;
+  border-radius:20px;
+  display:inline-block;
+  margin:5px;
 }
 
-@keyframes fadeIn{
+@keyframes fade{
   from{opacity:0;transform:translateY(10px);}
   to{opacity:1;transform:translateY(0);}
-}
-
-@media(max-width:600px){
-  .container{width:95%;}
 }
 </style>
 
@@ -87,123 +89,160 @@ button:hover{
 <body>
 
 <div class="container">
-  <h1>VivaForge Grammar Game</h1>
 
-  <div class="card">
-    <p class="level" id="levelText">Level: Easy</p>
-    <p>Score: <span id="score">0</span></p>
-    <p id="timer">Time: 10</p>
+  <!-- HOME SCREEN -->
+  <div id="home" class="screen active">
+    <div class="header">VivaForge App</div>
 
-    <div class="progress">
-      <div class="bar" id="bar"></div>
+    <p>🔥 Streak: <span id="streak">0</span> days</p>
+    <p>⭐ Score: <span id="score">0</span></p>
+
+    <div class="grid">
+
+      <div class="card" onclick="openGame('quiz')">🎮 Quiz Game</div>
+      <div class="card" onclick="openGame('grammar')">📘 Grammar</div>
+      <div class="card" onclick="openGame('fill')">✍ Fill Blanks</div>
+      <div class="card" onclick="openGame('scramble')">🔀 Scramble</div>
+      <div class="card" onclick="openGame('speed')">⚡ Speed Test</div>
+
     </div>
 
-    <h2 id="question">Loading...</h2>
-    <div id="options"></div>
-    <p id="result"></p>
+    <br>
+    <div class="badge">Daily Reward: +10 points</div>
+    <button onclick="reward()">Claim Reward</button>
   </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game" class="screen">
+
+    <h2 id="gTitle"></h2>
+    <p id="question"></p>
+
+    <div id="options"></div>
+
+    <p id="result"></p>
+
+    <button onclick="backHome()">Back</button>
+  </div>
+
 </div>
 
 <script>
-let score=0;
-let index=0;
-let time=10;
-let timer;
-let correctStreak=0;
 
-const questions=[
-  // EASY
-  {level:"Easy",q:"I ___ a student.",options:["am","is","are"],answer:"am"},
-  {level:"Easy",q:"She ___ playing.",options:["is","are","am"],answer:"is"},
+// SOUND EFFECTS
+function sound(type){
+  let audio = new Audio();
+  if(type=="correct"){
+    audio.src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg";
+  }else{
+    audio.src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg";
+  }
+  audio.play();
+}
 
-  // MEDIUM
-  {level:"Medium",q:"He ___ to school daily.",options:["go","goes","gone"],answer:"goes"},
-  {level:"Medium",q:"They ___ happy.",options:["is","are","am"],answer:"are"},
+// DATA
+let score = localStorage.getItem("score") || 0;
+let streak = localStorage.getItem("streak") || 0;
 
-  // HARD
-  {level:"Hard",q:"If I ___ rich, I would travel.",options:["was","am","were"],answer:"were"},
-  {level:"Hard",q:"She ___ finished her work.",options:["has","have","had"],answer:"has"}
-];
+document.getElementById("score").innerText = score;
+document.getElementById("streak").innerText = streak;
 
-function loadQuestion(){
-  clearInterval(timer);
-  time=10;
+const games = {
+ quiz:[
+   {q:"I ___ a student",o:["am","is","are"],a:"am"},
+   {q:"She ___ happy",o:["is","are","am"],a:"is"}
+ ],
+ grammar:[
+   {q:"He ___ to school daily",o:["go","goes","gone"],a:"goes"}
+ ],
+ fill:[
+   {q:"She ___ playing football",o:["is","are"],a:"is"}
+ ],
+ scramble:[
+   {q:"Arrange: student / I / am",o:["I am student","am I student"],a:"I am student"}
+ ],
+ speed:[
+   {q:"Quick: 2+2=?",o:["3","4","5"],a:"4"}
+ ]
+};
 
-  let q=questions[index];
+let currentGame = [];
+let index = 0;
 
-  document.getElementById("question").innerText=q.q;
-  document.getElementById("levelText").innerText="Level: "+q.level;
+// OPEN GAME
+function openGame(type){
+  document.getElementById("home").classList.remove("active");
+  document.getElementById("game").classList.add("active");
 
-  let html="";
-  q.options.forEach(opt=>{
-    html+=`<button onclick="check('${opt}')">${opt}</button>`;
+  currentGame = games[type];
+  index = 0;
+
+  document.getElementById("gTitle").innerText = type.toUpperCase();
+
+  loadQ();
+}
+
+// LOAD QUESTION
+function loadQ(){
+  let q = currentGame[index];
+
+  document.getElementById("question").innerText = q.q;
+
+  let html = "";
+  q.o.forEach(opt=>{
+    html += `<button onclick="check('${opt}')">${opt}</button>`;
   });
 
-  document.getElementById("options").innerHTML=html;
-  document.getElementById("result").innerText="";
-
-  startTimer();
-  updateProgress();
+  document.getElementById("options").innerHTML = html;
 }
 
-function startTimer(){
-  document.getElementById("timer").innerText="Time: "+time;
-
-  timer=setInterval(()=>{
-    time--;
-    document.getElementById("timer").innerText="Time: "+time;
-
-    if(time<=0){
-      clearInterval(timer);
-      next();
-    }
-  },1000);
-}
-
+// CHECK ANSWER
 function check(ans){
-  let correct=questions[index].answer;
+  let correct = currentGame[index].a;
 
-  if(ans===correct){
-    score+=10;
-    correctStreak++;
-    document.getElementById("result").innerText="Correct!";
+  if(ans === correct){
+    score = Number(score) + 10;
+    streak = Number(streak) + 1;
+    sound("correct");
+    document.getElementById("result").innerText = "Correct!";
   }else{
-    correctStreak=0;
-    document.getElementById("result").innerText="Wrong! Answer: "+correct;
+    streak = 0;
+    sound("wrong");
+    document.getElementById("result").innerText = "Wrong! Ans: " + correct;
   }
 
-  document.getElementById("score").innerText=score;
+  localStorage.setItem("score", score);
+  localStorage.setItem("streak", streak);
 
-  clearInterval(timer);
-  setTimeout(next,700);
-}
+  document.getElementById("score").innerText = score;
+  document.getElementById("streak").innerText = streak;
 
-function next(){
   index++;
 
-  if(index>=questions.length){
-    endGame();
-    return;
-  }
-
-  loadQuestion();
+  setTimeout(()=>{
+    if(index < currentGame.length){
+      loadQ();
+    }else{
+      document.getElementById("question").innerText = "Game Finished!";
+      document.getElementById("options").innerHTML = "";
+    }
+  },600);
 }
 
-function updateProgress(){
-  let percent=(index/questions.length)*100;
-  document.getElementById("bar").style.width=percent+"%";
+// BACK HOME
+function backHome(){
+  document.getElementById("game").classList.remove("active");
+  document.getElementById("home").classList.add("active");
 }
 
-function endGame(){
-  document.querySelector(".card").innerHTML=`
-    <h2>Game Finished 🎯</h2>
-    <h3>Your Score: ${score}</h3>
-    <p>Accuracy: ${(score/(questions.length*10))*100}%</p>
-    <button onclick="location.reload()">Play Again</button>
-  `;
+// DAILY REWARD
+function reward(){
+  score = Number(score) + 10;
+  localStorage.setItem("score", score);
+  document.getElementById("score").innerText = score;
+  alert("Daily Reward Claimed!");
 }
 
-loadQuestion();
 </script>
 
 </body>

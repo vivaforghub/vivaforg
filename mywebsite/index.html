@@ -1,60 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>VivaForge</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VivaForge</title>
 
-  <style>
-    body {
-      font-family: Arial;
-      text-align: center;
-      background: linear-gradient(to right, #74ebd5, #9face6);
-      margin: 0;
-      padding: 20px;
-    }
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0f172a;
+  color:white;
+  text-align:center;
+}
 
-    .card {
-      background: white;
-      padding: 30px;
-      margin: auto;
-      max-width: 500px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+}
 
-    h1 { color: #333; }
+.card{
+  background:#1e293b;
+  padding:25px;
+  margin:15px 0;
+  border-radius:15px;
+  cursor:pointer;
+  transition:.3s;
+  font-size:20px;
+  font-weight:bold;
+}
 
-    button {
-      padding: 12px 20px;
-      margin: 15px;
-      background: #007BFF;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+.card:hover{
+  transform:scale(1.05);
+  background:#334155;
+}
 
-    button:hover { background: #0056b3; }
+h1{
+  color:#38bdf8;
+}
 
-    a { text-decoration: none; color: #007BFF; }
-  </style>
+</style>
+
 </head>
 
 <body>
 
-  <div class="card">
-    <h1>VivaForge</h1>
-    <p>Master your Interview Skills</p>
+<div class="container">
 
-    <a href="practice.html">
-      <button>Start Practice</button>
-    </a>
+  <h1>VivaForge</h1>
+  <p>Select Mode</p>
 
-    <br><br>
-
-    <a href="about.html">About</a> |
-    <a href="contact.html">Contact</a> |
-    <a href="privacy.html">Privacy</a>
+  <!-- QUIZ OPTION -->
+  <div class="card" onclick="openQuiz()">
+    🎮 Grammar Quiz Game
   </div>
+
+  <!-- INTERVIEW OPTION -->
+  <div class="card" onclick="openInterview()">
+    💼 Interview Practice
+  </div>
+
+</div>
+
+<script>
+function openQuiz(){
+  window.location.href="games.html";
+}
+
+function openInterview(){
+  window.location.href="practice.html";
+}
+</script>
 
 </body>
 </html>

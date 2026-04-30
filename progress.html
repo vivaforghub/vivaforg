@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Progress</title>
+<style>
+body{background:#0f172a;color:white;text-align:center;font-family:Arial;}
+.card{background:#1e293b;padding:20px;margin:10px;border-radius:10px;}
+</style>
+</head>
+
+<body>
+
+<h1>Your Progress</h1>
+
+<div class="card">
+Score: <span id="score"></span>
+</div>
+
+<div class="card">
+Streak: <span id="streak"></span>
+</div>
+
+<div class="card">
+Badge: <span id="badge"></span>
+</div>
+
+<script>
+let score=localStorage.getItem("score")||0;
+let streak=localStorage.getItem("streak")||0;
+
+document.getElementById("score").innerText=score;
+document.getElementById("streak").innerText=streak;
+
+let badge="Beginner";
+if(score>20) badge="Learner";
+if(score>50) badge="Pro";
+
+document.getElementById("badge").innerText=badge;
+</script>
+
+</body>
+</html>

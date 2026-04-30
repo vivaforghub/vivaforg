@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VivaForge</title>
+<title>VivaForge Home</title>
 
 <style>
 body{
@@ -15,31 +15,54 @@ body{
 }
 
 .container{
-  max-width:600px;
+  max-width:700px;
   margin:auto;
-  padding:30px;
-}
-
-.card{
-  background:#1e293b;
-  padding:25px;
-  margin:15px 0;
-  border-radius:15px;
-  cursor:pointer;
-  transition:.3s;
-  font-size:20px;
-  font-weight:bold;
-}
-
-.card:hover{
-  transform:scale(1.05);
-  background:#334155;
+  padding:20px;
 }
 
 h1{
   color:#38bdf8;
+  margin-bottom:5px;
 }
 
+.sub{
+  color:#94a3b8;
+  margin-bottom:20px;
+}
+
+.user{
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.card{
+  background:#1e293b;
+  padding:18px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+  font-size:15px;
+}
+
+.card:hover{
+  background:#334155;
+  transform:scale(1.05);
+}
+
+.footer{
+  margin-top:20px;
+  font-size:12px;
+  color:#94a3b8;
+}
 </style>
 
 </head>
@@ -48,28 +71,55 @@ h1{
 
 <div class="container">
 
-  <h1>VivaForge</h1>
-  <p>Select Mode</p>
+<h1>🚀 VivaForge</h1>
+<p class="sub">Learn • Practice • Improve</p>
 
-  <!-- QUIZ OPTION -->
-  <div class="card" onclick="openQuiz()">
-    🎮 Grammar Quiz Game
-  </div>
+<div class="user">
+👋 Welcome: <span id="user">Guest</span>
+</div>
 
-  <!-- INTERVIEW OPTION -->
-  <div class="card" onclick="openInterview()">
-    💼 Interview Practice
-  </div>
+<div class="grid">
+
+<div class="card" onclick="go('games.html')">
+🎮 Games Hub
+</div>
+
+<div class="card" onclick="go('daily.html')">
+📅 Daily Challenge
+</div>
+
+<div class="card" onclick="go('progress.html')">
+📊 Progress Tracker
+</div>
+
+<div class="card" onclick="go('blog.html')">
+📝 Blog & Interview Guide
+</div>
+
+<div class="card" onclick="go('practice.html')">
+💼 Interview Practice
+</div>
+
+<div class="card" onclick="alert('Coming Soon 🚀')">
+⚡ More Features
+</div>
+
+</div>
+
+<p class="footer">Built for learners • Designed for success</p>
 
 </div>
 
 <script>
-function openQuiz(){
-  window.location.href="games.html";
+// load username
+let user = localStorage.getItem("user");
+if(user){
+  document.getElementById("user").innerText = user;
 }
 
-function openInterview(){
-  window.location.href="practice.html";
+// navigation
+function go(page){
+  window.location.href = "./" + page;
 }
 </script>
 

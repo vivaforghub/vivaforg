@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Daily Challenge</title>
+<style>
+body{background:#0f172a;color:white;text-align:center;font-family:Arial;}
+button{padding:10px;width:80%;border:none;border-radius:8px;background:#22c55e;}
+</style>
+</head>
+
+<body>
+
+<h1>Daily Challenge</h1>
+<p>Streak: <span id="streak">0</span></p>
+
+<button onclick="claim()">Claim Today Reward</button>
+
+<script>
+let streak=localStorage.getItem("streak")||0;
+document.getElementById("streak").innerText=streak;
+
+function claim(){
+streak++;
+localStorage.setItem("streak",streak);
+alert("Reward + streak increased");
+}
+</script>
+
+</body>
+</html>

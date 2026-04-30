@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+<url>
+<loc>https://username.github.io/repo-name/</loc>
+</url>
+
+<url>
+<loc>https://username.github.io/repo-name/blog.html</loc>
+</url>
+
+<url>
+<loc>https://username.github.io/repo-name/games.html</loc>
+</url>
+
+<url>
+<loc>https://username.github.io/repo-name/daily.html</loc>
+</url>
+
+<url>
+<loc>https://username.github.io/repo-name/progress.html</loc>
+</url>
+
+</urlset>

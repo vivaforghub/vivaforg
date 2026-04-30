@@ -3,7 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VivaForge Home</title>
+
+<title>VivaForge - English, Interview, IMP, CAT, SSC, CBSE Preparation Platform</title>
+
+<meta name="description" content="Learn English, Interview preparation, Grammar practice, IMP exams, CAT, SSC, CBSE study with interactive quizzes, games, blogs and daily challenges.">
+<meta name="keywords" content="English learning, Interview questions, IMP exam preparation, CAT preparation, SSC study, CBSE exams, Grammar practice, Study games, Daily quiz platform">
+<meta name="author" content="VivaForge">
+<meta name="robots" content="index, follow">
+
+<meta property="og:title" content="VivaForge - Learn & Crack Exams Easily">
+<meta property="og:description" content="Best platform for English, Interview, IMP, CAT, SSC, CBSE preparation with quizzes, blogs and games.">
+<meta property="og:type" content="website">
 
 <style>
 body{
@@ -15,14 +25,14 @@ body{
 }
 
 .container{
-  max-width:700px;
+  max-width:800px;
   margin:auto;
   padding:20px;
 }
 
 h1{
   color:#38bdf8;
-  margin-bottom:5px;
+  font-size:28px;
 }
 
 .sub{
@@ -30,32 +40,32 @@ h1{
   margin-bottom:20px;
 }
 
-.user{
+.card{
   background:#1e293b;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:15px;
+  padding:18px;
+  margin:10px 0;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.card:hover{
+  background:#334155;
+  transform:scale(1.03);
 }
 
 .grid{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:12px;
+  gap:10px;
 }
 
-.card{
+.user{
   background:#1e293b;
-  padding:18px;
-  border-radius:14px;
-  cursor:pointer;
-  font-weight:bold;
-  transition:.2s;
-  font-size:15px;
-}
-
-.card:hover{
-  background:#334155;
-  transform:scale(1.05);
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 
 .footer{
@@ -71,8 +81,8 @@ h1{
 
 <div class="container">
 
-<h1>🚀 VivaForge</h1>
-<p class="sub">Learn • Practice • Improve</p>
+<h1>🚀 VivaForge Learning Hub</h1>
+<p class="sub">Learn • Practice • Crack Exams Faster</p>
 
 <div class="user">
 👋 Welcome: <span id="user">Guest</span>
@@ -80,44 +90,40 @@ h1{
 
 <div class="grid">
 
-<div class="card" onclick="go('games.html')">
-🎮 Games Hub
-</div>
+<div class="card" onclick="go('games.html')">🎮 Games Hub</div>
 
-<div class="card" onclick="go('daily.html')">
-📅 Daily Challenge
-</div>
+<div class="card" onclick="go('daily.html')">📅 Daily Challenge</div>
 
-<div class="card" onclick="go('progress.html')">
-📊 Progress Tracker
-</div>
+<div class="card" onclick="go('progress.html')">📊 Progress Tracker</div>
 
-<div class="card" onclick="go('blog.html')">
-📝 Blog & Interview Guide
-</div>
+<div class="card" onclick="go('blog.html')">📝 Interview & English Blog</div>
 
-<div class="card" onclick="go('practice.html')">
-💼 Interview Practice
-</div>
+<div class="card" onclick="go('practice.html')">💼 Interview Practice</div>
 
-<div class="card" onclick="alert('Coming Soon 🚀')">
-⚡ More Features
-</div>
+<div class="card" onclick="go('imp.html')">📘 IMP Exam Prep</div>
+
+<div class="card" onclick="go('cat.html')">🎯 CAT Preparation</div>
+
+<div class="card" onclick="go('ssc.html')">🏫 SSC Exam Prep</div>
+
+<div class="card" onclick="go('cbse.html')">📚 CBSE Study Hub</div>
 
 </div>
 
-<p class="footer">Built for learners • Designed for success</p>
+<p class="sub">
+Master English + Crack IMP, CAT, SSC, CBSE exams with interactive learning system
+</p>
+
+<p class="footer">Built for Students • Designed for Success</p>
 
 </div>
 
 <script>
-// load username
 let user = localStorage.getItem("user");
 if(user){
   document.getElementById("user").innerText = user;
 }
 
-// navigation
 function go(page){
   window.location.href = "./" + page;
 }

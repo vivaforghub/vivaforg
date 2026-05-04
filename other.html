@@ -4,11 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>About VivaForge - Learning Platform</title>
+<title>VivaForge - English, Interview, IMP, CAT, SSC, CBSE Preparation Platform</title>
 
-<meta name="description" content="About VivaForge - A student-focused learning platform for English, Interview preparation, IMP, CAT, SSC, CBSE exams with interactive practice, blogs, and games.">
-<meta name="keywords" content="About VivaForge, English learning platform, Interview preparation, IMP exam, CAT SSC CBSE study, student learning system">
+<meta name="description" content="Learn English, Interview preparation, Grammar practice, IMP exams, CAT, SSC, CBSE study with interactive quizzes, games, blogs and daily challenges.">
+<meta name="keywords" content="English learning, Interview questions, IMP exam preparation, CAT preparation, SSC study, CBSE exams, Grammar practice, Study games, Daily quiz platform">
+<meta name="author" content="VivaForge">
 <meta name="robots" content="index, follow">
+
+<meta property="og:title" content="VivaForge - Learn & Crack Exams Easily">
+<meta property="og:description" content="Best platform for English, Interview, IMP, CAT, SSC, CBSE preparation with quizzes, blogs and games.">
+<meta property="og:type" content="website">
 
 <style>
 body{
@@ -16,47 +21,57 @@ body{
   font-family:Arial;
   background:#0f172a;
   color:white;
+  text-align:center;
 }
 
 .container{
-  max-width:850px;
+  max-width:800px;
   margin:auto;
   padding:20px;
 }
 
 h1{
-  text-align:center;
   color:#38bdf8;
-  margin-bottom:10px;
+  font-size:28px;
+}
+
+.sub{
+  color:#94a3b8;
+  margin-bottom:20px;
 }
 
 .card{
   background:#1e293b;
-  padding:22px;
+  padding:18px;
+  margin:10px 0;
   border-radius:14px;
-  margin:15px 0;
-  line-height:1.8;
+  cursor:pointer;
+  font-weight:bold;
   transition:.2s;
 }
 
 .card:hover{
-  transform:scale(1.01);
+  background:#334155;
+  transform:scale(1.03);
 }
 
-h2{
-  color:#fbbf24;
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-.highlight{
-  color:#38bdf8;
-  font-weight:bold;
+.user{
+  background:#1e293b;
+  padding:10px;
+  border-radius:10px;
+  margin-bottom:15px;
 }
 
 .footer{
-  text-align:center;
-  color:#94a3b8;
   margin-top:20px;
   font-size:12px;
+  color:#94a3b8;
 }
 </style>
 
@@ -66,70 +81,53 @@ h2{
 
 <div class="container">
 
-<h1>📘 About VivaForge</h1>
+<h1>🚀 VivaForge Learning Hub</h1>
+<p class="sub">Learn • Practice • Crack Exams Faster</p>
 
-<div class="card">
+<div class="user">
+👋 Welcome: <span id="user">Guest</span>
+</div>
 
-<h2>🚀 What is VivaForge?</h2>
-<p>
-VivaForge is a modern learning platform designed for students who want to improve their skills in <span class="highlight">English communication, interview preparation, and competitive exams</span> like IMP, CAT, SSC, and CBSE.
+<div class="grid">
+
+<div class="card" onclick="go('games.html')">🎮 Games Hub</div>
+
+<div class="card" onclick="go('daily.html')">📅 Daily Challenge</div>
+
+<div class="card" onclick="go('progress.html')">📊 Progress Tracker</div>
+
+<div class="card" onclick="go('blog.html')">📝 Interview & English Blog</div>
+
+<div class="card" onclick="go('practice.html')">💼 Interview Practice</div>
+
+<div class="card" onclick="go('imp.html')">📘 IMP Exam Prep</div>
+
+<div class="card" onclick="go('cat.html')">🎯 CAT Preparation</div>
+
+<div class="card" onclick="go('ssc.html')">🏫 SSC Exam Prep</div>
+
+<div class="card" onclick="go('cbse.html')">📚 CBSE Study Hub</div>
+
+</div>
+
+<p class="sub">
+Master English + Crack IMP, CAT, SSC, CBSE exams with interactive learning system
 </p>
 
-<p>
-The goal of this platform is simple: make learning <span class="highlight">interactive, practical, and result-oriented</span> instead of traditional boring study methods.
-</p>
+<p class="footer">Built for Students • Designed for Success</p>
 
 </div>
 
-<div class="card">
+<script>
+let user = localStorage.getItem("user");
+if(user){
+  document.getElementById("user").innerText = user;
+}
 
-<h2>🎯 Our Mission</h2>
-<p>
-We aim to help students build real-world skills such as confidence, communication, and problem-solving ability.
-Instead of only theory, VivaForge focuses on <span class="highlight">practice-based learning through quizzes, games, and blogs</span>.
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>📚 What You Can Learn Here</h2>
-
-<p>✔ English grammar and fluency</p>
-<p>✔ Interview preparation for freshers</p>
-<p>✔ IMP, CAT, SSC, CBSE exam preparation</p>
-<p>✔ Daily quizzes and practice challenges</p>
-<p>✔ Motivation and study strategies</p>
-
-</div>
-
-<div class="card">
-
-<h2>⚡ Why VivaForge is Different?</h2>
-<p>
-Most platforms focus only on theory. VivaForge combines <span class="highlight">learning + practice + engagement</span> in one system.
-</p>
-
-<p>
-With interactive games, blogs, and progress tracking, students don’t just study—they actually <span class="highlight">experience learning</span>.
-</p>
-
-</div>
-
-<div class="card">
-
-<h2>📈 Our Vision</h2>
-<p>
-To become a trusted student learning ecosystem where every learner can improve skills step-by-step and achieve academic and career success confidently.
-</p>
-
-</div>
-
-<div class="footer">
-VivaForge • Learn. Practice. Improve.
-</div>
-
-</div>
+function go(page){
+  window.location.href = "./" + page;
+}
+</script>
 
 </body>
 </html>
